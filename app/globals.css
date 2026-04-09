@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #070708;
+  --ink-elevated: #0e0e12;
+  --paper: #f4efe6;
+  --paper-muted: #b8b0a3;
+  --vermillion: #c73e2e;
+  --vermillion-glow: rgba(199, 62, 46, 0.45);
+  --gold: #c4a35a;
+  --border-subtle: rgba(244, 239, 230, 0.08);
+  --border-strong: rgba(244, 239, 230, 0.14);
+  --glass: rgba(14, 14, 18, 0.72);
+}
+
+/* Editorial display + Korean UI body (set in layout via next/font) */
+.font-display {
+  font-family: var(--font-display), ui-serif, Georgia, serif;
+}
+
+.font-ui {
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+@keyframes rise-fade {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer-line {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.65;
+  }
+}
+
+.animate-rise {
+  animation: rise-fade 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 0;
+}
+
+.animate-shimmer {
+  animation: shimmer-line 2.8s ease-in-out infinite;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2.2s ease-in-out infinite;
+}
+
+/* Film grain overlay */
+.grain::after {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* Decorative column rule */
+.rule-vertical {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    var(--vermillion) 12%,
+    var(--gold) 50%,
+    var(--vermillion) 88%,
+    transparent 100%
+  );
+}
